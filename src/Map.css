@@ -1,0 +1,27 @@
+.map {
+    width: 500px;
+    height: 500px;
+}
+
+.map td{
+    width: 10;
+    height: 10;
+    border: solid black 1px;
+    margin: 0;
+}
+
+.map .empty{
+    background-color: white;
+}
+
+.map .wall{
+    background-color: black;
+}
+
+.map .player{
+    background-color: blue;
+}
+
+.map .enemy{
+    background-color: red;
+}

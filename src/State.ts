@@ -35,13 +35,13 @@ export default class State {
         let ret = ""
         for(let i = 0; i < 30; i++){
             for(let j = 0; j < 30; j++){
-                if(this.playerPos[0] == i && this.playerPos[1] == j){
+                if(this.playerPos[0] === i && this.playerPos[1] === j){
                     ret += "P"
                 }
-                else if(this.enemiesPos.some(([x, y]) => x == i && y == j)){
+                else if(this.enemiesPos.some(([x, y]) => x === i && y === j)){
                     ret += "E"
                 }
-                else if(Map[i][j] == 1){
+                else if(Map[i][j] === 1){
                     ret += "#"
                 }
                 else{

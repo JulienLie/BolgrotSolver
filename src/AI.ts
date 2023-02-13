@@ -51,7 +51,7 @@ function generateNewStates(state: State): State[] {
         let pos: [number, number][] = [[1, 1], [-1, 1], [-1, -1], [1, -1]]
         for(let [x, y] of pos){
             let newEnemiesPos = computeEnemiesMovement([state.playerPos[0] + x, state.playerPos[1] + y], state.enemiesPos)
-            if(newEnemiesPos.some(([x, y]) => x == state.playerPos[0] && y == state.playerPos[1])){
+            if(newEnemiesPos.some(([x, y]) => x === state.playerPos[0] && y === state.playerPos[1])){
                 newStates.push(new State(0, state.playerPos, newEnemiesPos, 0, 0, "attract"))
             }
             else{
@@ -62,7 +62,7 @@ function generateNewStates(state: State): State[] {
 
     // End turn
     let newEnemiesPos = computeEnemiesMovement(state.playerPos, state.enemiesPos)
-    if(newEnemiesPos.some(([x, y]) => x == state.playerPos[0] && y == state.playerPos[1])){
+    if(newEnemiesPos.some(([x, y]) => x === state.playerPos[0] && y === state.playerPos[1])){
         newStates.push(new State(0, state.playerPos, newEnemiesPos, 0, 0))
     }
     else{
@@ -171,12 +171,16 @@ function pushEnemies(playerPos: [number, number], enemiesPos: Array<[number, num
             // remove the enemy that the player stepped on
             newEnemiesPos.splice(i, 1);
             // push all enemies around the killed enemy
-            let pushPos: Array<[number, number]> = [[enemiesPos[i][0] - 1, enemiesPos[i][1]], [enemiesPos[i][0] + 1, enemiesPos[i][1]], [enemiesPos[i][0], enemiesPos[i][1] - 1], [enemiesPos[i][0], enemiesPos[i][1] + 1]];
+            let pushPos: Array<[number, number]> = [
+                [enemiesPos[i][0] - 1, enemiesPos[i][1]], 
+                [enemiesPos[i][0] + 1, enemiesPos[i][1]], 
+                [enemiesPos[i][0], enemiesPos[i][1] - 1], 
+                [enemiesPos[i][0], enemiesPos[i][1] + 1]];
             for (let j = 0; j < pushPos.length; j++) {
                 let toPush = newEnemiesPos.find((val) => val[0] === pushPos[j][0] && val[1] === pushPos[j][1]);
                 if (toPush) {
                     let f = toPush
-                    newEnemiesPos.filter(([x, y]) => x != f[0] || y != f[1])
+                    newEnemiesPos.filter(([x, y]) => x !== f[0] || y !== f[1])
                     newEnemiesPos.push(pushPos[j]);
                 }
             }
@@ -244,10 +248,10 @@ for(let i = 0; i < 15; i++){
     while(nok){
         let enemy: [number, number] = [Math.round(Math.random()*30), Math.round(Math.random()*30)]
 
-        if(enemy[0] == 15 && enemy[1] == 15) continue;
+        if(enemy[0] === 15 && enemy[1] === 15) continue;
         if(Map[enemy[0]] && Map[enemy[0]][enemy[1]] === 0) continue; 
 
-        if(!enemies.find(([x, y]) => x == enemy[0] && y == enemy[1])){
+        if(!enemies.find(([x, y]) => x === enemy[0] && y === enemy[1])){
             nok = false;
             enemies.push(enemy)
         }

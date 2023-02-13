@@ -20,7 +20,7 @@ function App() {
   const handleRunAI = () => {
     let computedPath = depthFirstSearch(state, 100000)
     console.log(computedPath)
-    if(computedPath != null)
+    if(computedPath !== null)
       setPath(computedPath)
       setStep(0)
   };

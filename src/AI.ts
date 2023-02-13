@@ -9,7 +9,7 @@ function computePlayerMovement(state: State, [x, y]: [number, number], move2 = f
     let newEnemiesPos = pushEnemies(newPos, state.enemiesPos)
 
     newEnemiesPos = computeEnemiesMovement(newPos, newEnemiesPos)
-    if(newEnemiesPos.some(([x, y]) => x == newPos[0] && y == newPos[1])){
+    if(newEnemiesPos.some(([x, y]) => x === newPos[0] && y === newPos[1])){
         return new State(0, newPos, newEnemiesPos, 0, 0)
     }
     else{
